@@ -1,0 +1,102 @@
+<html>
+<head>
+<title></title>
+<style>
+body {
+	font-family:verdana;
+}
+h1 {
+	color: #000000;
+	font-size: x-large;
+	font-family:Lucida Handwriting;
+}
+thead {
+	background-color:#FFE4B5;
+	valign: center;
+}
+tbody {
+	background-color:#FFFFCC;
+	border-color: #800000;
+}
+input {
+	color: #000000;
+}
+</style>
+</head>
+<body>
+<div id="wrapper">
+<div class="container">
+	<form id="tinh-tien-dien">
+	<table cellspacing="0" cellpadding="5" align="center">
+	<thead>
+	<tr>
+		<th colspan="2"><h1>TÍNH TIỀN ĐIỆN SINH HOẠT<br>BẬC THANG</h1></th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>Chỉ số cũ:</td>
+		<td><input type="number" id="chi-so-cu" placeholder="Nhập chỉ số cũ" ></td>
+	</tr>
+		<td>Chỉ số mới:</td>
+		<td><input type="number" id="chi-so-moi" placeholder="Nhập chỉ số mới" ></td>
+	</tr>
+	<tr>
+		<td>Điện năng tiêu thụ:</td>
+		<td><input id="tieu-thu" disabled="disabled" ></td>
+	</tr>
+	<tr>
+		<td>Thành tiền:</td>
+		<td><input id="thanh-tien" disabled="disabled" ></td>
+	</tr>
+	<tr>
+		<td>Tổng tiền đã có VAT</td>
+		<td><input id="VAT" disabled="disabled" ></td>
+	</tr>
+	<tr>
+		<td colspan="2"><center><input type="button" onClick="ThanhTien()" value="Tính tiền điện">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" onClick="TongKemVAT()" value="Tiếp tục">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="reset" value="Thoát"></center></td>
+	</tr>
+	</tbody>
+</table>
+</form>
+</div>
+</div>
+<script type="text/javascript">
+	function ThanhTien() {
+		var chisocu = document.getElementById('chi-so-cu');
+		var chisomoi = document.getElementById('chi-so-moi');
+        var tieu = Number(chisomoi.value) - Number(chisocu.value);
+            document.getElementById('tieu-thu').value = tieu;
+        
+		var tong = tieu * 2030;
+            document.getElementById('thanh-tien').value = tong;
+	}
+	
+	function TongKemVAT(){
+		var tieu = document.getElementById('tieu-thu');
+		var tong = document.getElementById('thanh-tien');
+        if ( tieu.value < 101 ){
+                var  VAT = Number(tong.value) + Number(tieu.value) * 1418;
+        	}
+            else if ( tieu.value < 151 ){
+                var  VAT = Number(tong.value) + Number(tieu.value) * 1622;
+            }
+            else if ( tieu.value < 201 ){
+                var  VAT = Number(tong.value) + Number(tieu.value) * 2044;
+            }
+            else if ( tieu.value < 301 ){
+                var  VAT = Number(tong.value) + Number(tieu.value) * 2210;
+            }
+            else if ( tieu.value < 401 ){
+                var  VAT = Number(tong.value) + Number(tieu.value) * 2361;
+            }
+            else{
+                var  VAT = Number(tong.value) + Number(tieu.value) * 2420;
+            }
+        document.getElementById('VAT').value = VAT;
+	}
+</script>
+</body>
+</html>
